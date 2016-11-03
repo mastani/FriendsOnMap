@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#8c001a">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:background="#657383">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:src="@mipmap/ic_launcher"
+            android:layout_row="19"
+            android:layout_column="3"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="پروژه کارشناسی"
+            android:id="@+id/textView"
+            android:layout_row="20"
+            android:layout_column="3"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="#fefcff"
+            android:paddingTop="25dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="مبینا سادات حسینی"
+            android:id="@+id/textView2"
+            android:layout_row="20"
+            android:layout_column="3"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="#fefcff"
+            android:paddingTop="25dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="تابستان 95"
+            android:id="@+id/textView3"
+            android:layout_row="20"
+            android:layout_column="3"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="#fefcff"
+            android:paddingTop="25dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

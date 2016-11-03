@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "357036919805",
+    "project_id": "firebase-uniiii"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:357036919805:android:25fd48edddca838d",
+        "android_client_info": {
+          "package_name": "mobina.com.uniiii"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "357036919805-cattl27d513855lr26bqu7b7j74s72sl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mobina.com.uniiii",
+            "certificate_hash": "A0EA290EF0D9C4792BA7B89AEA31AABD66686C09"
+          }
+        },
+        {
+          "client_id": "357036919805-8rci7jdvs1s87rg9g6qlq9tu5cjn6oev.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmkg69LXxTm24RM5CThhp7XAf9kncN8YM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

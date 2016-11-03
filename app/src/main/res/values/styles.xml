@@ -1,0 +1,43 @@
+<resources>
+    <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">#0b41b4</item>
+
+        <!-- Used for the title and text -->
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="textColorAlertDialogListItem">#FFFFFF</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+
+
+        <!-- Used for the background -->
+        <item name="android:background">#000000</item>
+    </style>
+
+    <!--theme koli-->
+    <style name="koli" parent="Theme.AppCompat">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">#0b41b4</item>
+
+        <!-- Used for the title and text -->
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="textColorAlertDialogListItem">#FFFFFF</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+
+
+        <!-- Used for the background -->
+        <item name="android:background">#000000</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/common_google_signin_btn_text_dark_focused</item>
+        <item name="colorPrimaryDark">@color/common_google_signin_btn_text_dark</item>
+        <item name="colorAccent">@color/wallet_dim_foreground_disabled_holo_dark</item>
+    </style>
+
+
+
+
+
+</resources>
