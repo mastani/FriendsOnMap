@@ -32,8 +32,8 @@ public class UsersActivity extends AppCompatActivity {
         //   Toast.makeText(MainActivity.this, "careated!!", Toast.LENGTH_SHORT).show();
         //
 
-        Globals.mydb = openOrCreateDatabase(Globals.DATABASE_NAME, Context.MODE_PRIVATE, null);
-        Cursor allrows = Globals.mydb.rawQuery("SELECT username FROM final ", null);
+        ApplicationController.getInstance().mydb = openOrCreateDatabase(ApplicationController.getInstance().DATABASE_NAME, Context.MODE_PRIVATE, null);
+        Cursor allrows = ApplicationController.getInstance().mydb.rawQuery("SELECT username FROM final ", null);
         //  Cursor allrowsa = mydb.rawQuery("SELECT arz FROM location3 ", null);
         // Cursor allrowsc  = mydb.rawQuery("SELECT username FROM proje1", null);
         while (allrows.moveToNext()) {
@@ -43,7 +43,7 @@ public class UsersActivity extends AppCompatActivity {
             listV.setAdapter(adapter);
 
         }
-        Globals.mydb.close();
+        ApplicationController.getInstance().mydb.close();
 
 
         //    while (allrowsa.moveToNext()){

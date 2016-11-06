@@ -79,7 +79,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 String lat2 = Double.toString(lat);
                 String lng2 = Double.toString(lng);
 
-                Globals.mydb.execSQL("INSERT INTO myloc2 (username,date,tool1,arz1) VALUES ('user','" + mytime + "','" + lat2 + "','" + lng2 + "')");
+                ApplicationController.getInstance().mydb.execSQL("INSERT INTO myloc2 (username,date,tool1,arz1) VALUES ('user','" + mytime + "','" + lat2 + "','" + lng2 + "')");
 
                 Toast.makeText(MapsActivity.this, " saved", Toast.LENGTH_SHORT).show();
             }

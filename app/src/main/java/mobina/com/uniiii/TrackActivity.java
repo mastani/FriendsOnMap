@@ -42,13 +42,13 @@ public class TrackActivity extends FragmentActivity implements OnMapReadyCallbac
 //Extract the data…
         String moh = bundle.getString("meghdar");
         Toast.makeText(TrackActivity.this, moh, Toast.LENGTH_SHORT).show();
-        Globals.mydb = openOrCreateDatabase(Globals.DATABASE_NAME, Context.MODE_PRIVATE, null);
+        ApplicationController.getInstance().mydb = openOrCreateDatabase(ApplicationController.getInstance().DATABASE_NAME, Context.MODE_PRIVATE, null);
 
-            Cursor tool1 = Globals.mydb.rawQuery("SELECT tool1 FROM final WHERE username = '" + moh + "'", null);
-            Cursor tool2 = Globals.mydb.rawQuery("SELECT tool2 FROM final WHERE username = '" + moh + "'", null);
-            Cursor tool3 = Globals.mydb.rawQuery("SELECT tool3 FROM final WHERE username = '" + moh + "'", null);
-            Cursor tool4 = Globals.mydb.rawQuery("SELECT tool4 FROM final WHERE username = '" + moh + "'", null);
-            Cursor tool5 = Globals.mydb.rawQuery("SELECT tool5 FROM final WHERE username = '" + moh + "'", null);
+            Cursor tool1 = ApplicationController.getInstance().mydb.rawQuery("SELECT tool1 FROM final WHERE username = '" + moh + "'", null);
+            Cursor tool2 = ApplicationController.getInstance().mydb.rawQuery("SELECT tool2 FROM final WHERE username = '" + moh + "'", null);
+            Cursor tool3 = ApplicationController.getInstance().mydb.rawQuery("SELECT tool3 FROM final WHERE username = '" + moh + "'", null);
+            Cursor tool4 = ApplicationController.getInstance().mydb.rawQuery("SELECT tool4 FROM final WHERE username = '" + moh + "'", null);
+            Cursor tool5 = ApplicationController.getInstance().mydb.rawQuery("SELECT tool5 FROM final WHERE username = '" + moh + "'", null);
             tool1.moveToNext();
             tool2.moveToNext();
             tool3.moveToNext();
@@ -63,11 +63,11 @@ public class TrackActivity extends FragmentActivity implements OnMapReadyCallbac
 
 
             /////////////////////////////////////// bazyabi arz ha
-            Cursor arz1 = Globals.mydb.rawQuery("SELECT arz1 FROM final WHERE username = '" + moh + "'", null);
-            Cursor arz2 = Globals.mydb.rawQuery("SELECT arz2 FROM final WHERE username = '" + moh + "'", null);
-            Cursor arz3 = Globals.mydb.rawQuery("SELECT arz3 FROM final WHERE username = '" + moh + "'", null);
-            Cursor arz4 = Globals.mydb.rawQuery("SELECT arz4 FROM final WHERE username = '" + moh + "'", null);
-            Cursor arz5 = Globals.mydb.rawQuery("SELECT arz5 FROM final WHERE username = '" + moh + "'", null);
+            Cursor arz1 = ApplicationController.getInstance().mydb.rawQuery("SELECT arz1 FROM final WHERE username = '" + moh + "'", null);
+            Cursor arz2 = ApplicationController.getInstance().mydb.rawQuery("SELECT arz2 FROM final WHERE username = '" + moh + "'", null);
+            Cursor arz3 = ApplicationController.getInstance().mydb.rawQuery("SELECT arz3 FROM final WHERE username = '" + moh + "'", null);
+            Cursor arz4 = ApplicationController.getInstance().mydb.rawQuery("SELECT arz4 FROM final WHERE username = '" + moh + "'", null);
+            Cursor arz5 = ApplicationController.getInstance().mydb.rawQuery("SELECT arz5 FROM final WHERE username = '" + moh + "'", null);
             arz1.moveToNext();
             arz2.moveToNext();
             arz3.moveToNext();
@@ -96,7 +96,7 @@ public class TrackActivity extends FragmentActivity implements OnMapReadyCallbac
 
 
 
-    Cursor date1 = Globals.mydb.rawQuery("SELECT date FROM final WHERE username = '" + moh + "'", null);
+    Cursor date1 = ApplicationController.getInstance().mydb.rawQuery("SELECT date FROM final WHERE username = '" + moh + "'", null);
     date1.moveToNext();
     String date11 = date1.getString(date1.getColumnIndex("date"));
     datelist.add(date11);
