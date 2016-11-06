@@ -4,11 +4,19 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -20,24 +28,45 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
-    private static final String TAG = LoginActivity.class.getSimpleName();
-    private static final int RC_SIGN_IN = 007;
+    static final String TAG = LoginActivity.class.getSimpleName();
+    static final int RC_SIGN_IN = 007;
 
-    private GoogleApiClient mGoogleApiClient;
-    private ProgressDialog mProgressDialog;
+    GoogleApiClient mGoogleApiClient;
+    ProgressDialog mProgressDialog;
 
-    private SignInButton btnSignIn;
-    private Button btnRegister;
+    TextInputLayout email;
+    TextInputLayout password;
+    Button btnLogin;
+
+    SignInButton btnSignIn;
+    Button btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        email = (TextInputLayout) findViewById(R.id.email);
+        password = (TextInputLayout) findViewById(R.id.password);
+        btnLogin = (Button) findViewById(R.id.btnLogin);
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Login();
+            }
+        });
+
         btnSignIn = (SignInButton) findViewById(R.id.btn_sign_in);
-        btnRegister = (Button) findViewById(R.id.btnRegister);
+        btnRegister = (Button) findViewById(R.id.btnGoRegister);
 
         btnSignIn.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
@@ -109,10 +138,80 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btn_sign_in:
                 signIn();
                 break;
-            case R.id.btnRegister:
+            case R.id.btnGoRegister:
                 Intent i = new Intent(this, RegisterActivity.class);
                 startActivity(i);
+                break;
         }
+    }
+
+    public void Login() {
+        boolean emailError;
+        boolean passwordError;
+
+        if (email.getEditText().getText().length() <= 0) {
+            email.setErrorEnabled(true);
+            email.setError("ایمیل خود را وارد کنید");
+            emailError = true;
+        } else if (!isEmailValid(email.getEditText().getText())) {
+            email.setErrorEnabled(true);
+            email.setError("ایمیل را به صورت صحیح وارد کنید");
+            emailError = true;
+        } else {
+            email.setErrorEnabled(false);
+            emailError = false;
+        }
+
+        if (password.getEditText().getText().length() == 0) {
+            password.setErrorEnabled(true);
+            password.setError(getString(R.string.password_error));
+            passwordError = true;
+        } else {
+            password.setErrorEnabled(false);
+            passwordError = false;
+        }
+
+        if (emailError || passwordError)
+            return;
+
+        String URL = "http://mobina.cloudsite.ir/login.php";
+        StringRequest req = new StringRequest(Request.Method.POST, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject mainObject = new JSONObject(response);
+                            if (mainObject.has("success") && mainObject.getBoolean("success")) {
+                                Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+                                startActivity(i);
+                            } else {
+                                Toast.makeText(getBaseContext(), R.string.login_fail, Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+
+                        }
+                    }
+                }
+                ,
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getBaseContext(), R.string.internet_error, Toast.LENGTH_LONG).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", email.getEditText().getText().toString());
+                params.put("password", password.getEditText().getText().toString());
+                return params;
+            }
+        };
+
+        req.setShouldCache(false);
+        req.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        ApplicationController.getInstance().addToRequestQueue(req);
     }
 
     @Override
@@ -172,6 +271,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void hideProgressDialog() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.hide();
+        }
+    }
+
+    public boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    public boolean isMobileValid(CharSequence mobile) {
+        if (mobile.length() != 11) {
+            return false;
+        } else {
+            return android.util.Patterns.PHONE.matcher(mobile).matches();
         }
     }
 }

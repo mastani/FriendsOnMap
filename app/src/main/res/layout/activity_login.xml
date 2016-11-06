@@ -113,7 +113,7 @@
         app:colorScheme="dark" />
 
     <Button
-        android:id="@+id/btnRegister"
+        android:id="@+id/btnGoRegister"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -86,8 +86,16 @@
 
     <string name="login">ورود</string>
     <string name="register">عضویت</string>
+    <string name="name">نام و نام خانوادگی</string>
     <string name="email">ایمیل</string>
     <string name="password">کلمه عبور</string>
     <string name="confirmPassword">کلمه عبور (مجدد)</string>
     <string name="mobile">شماره تلفن همراه</string>
+    <string name="password_error">کلمه های عبور تطابق ندارند</string>
+
+    <string name="login_fail">اطلاعات وارد شده نامعتبر است</string>
+    <string name="register_success">ثبت نام با موفقیت انجام شد</string>
+    <string name="register_fail">ایمیل یا شماره موبایل وجود دارد. ثبت نام با مشکل مواجه شد</string>
+
+    <string name="internet_error">اتصال اینترنت خود را بررسی کنید</string>
 </resources>
