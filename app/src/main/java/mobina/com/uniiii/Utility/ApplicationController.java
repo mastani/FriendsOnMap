@@ -1,6 +1,5 @@
-package mobina.com.uniiii;
+package mobina.com.uniiii.Utility;
 
-import android.app.Application;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.multidex.MultiDexApplication;
@@ -8,7 +7,6 @@ import android.text.TextUtils;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.Volley;
 
 public class ApplicationController extends MultiDexApplication {

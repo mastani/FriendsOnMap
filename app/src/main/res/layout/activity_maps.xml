@@ -8,11 +8,33 @@
     tools:context="mobina.com.uniiii.MapsActivity">
 
     <Button
+        android:id="@+id/activity_request"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|bottom"
+        android:layout_marginBottom="185dp"
+        android:background="#000000"
+        android:padding="10dp"
+        android:paddingLeft="10dp"
+        android:text="Request" />
+
+    <Button
+        android:id="@+id/activity_friends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|bottom"
+        android:layout_marginBottom="130dp"
+        android:background="#000000"
+        android:padding="10dp"
+        android:paddingLeft="10dp"
+        android:text="Friends" />
+
+    <Button
         android:id="@+id/activity_users"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left|bottom"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="75dp"
         android:background="#000000"
         android:padding="10dp"
         android:paddingLeft="10dp"

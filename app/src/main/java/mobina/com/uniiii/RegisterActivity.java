@@ -14,13 +14,16 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+
+import mobina.com.uniiii.Utility.ApplicationController;
+import mobina.com.uniiii.Utility.Utilies;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -70,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
             email.setErrorEnabled(true);
             email.setError("ایمیل خود را وارد کنید");
             emailError = true;
-        } else if (!isEmailValid(email.getEditText().getText())) {
+        } else if (!Utilies.isEmailValid(email.getEditText().getText())) {
             email.setErrorEnabled(true);
             email.setError("ایمیل را به صورت صحیح وارد کنید");
             emailError = true;
@@ -83,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
             mobile.setErrorEnabled(true);
             mobile.setError("شماره همراه خود را وارد کنید");
             mobileError = true;
-        } else if (!isMobileValid(mobile.getEditText().getText())) {
+        } else if (!Utilies.isMobileValid(mobile.getEditText().getText())) {
             mobile.setErrorEnabled(true);
             mobile.setError("شماره همراه را به صورت صحیح وارد کنید: 09xxxxxxxxx");
             mobileError = true;
@@ -107,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (nameError || emailError || mobileError || passwordError)
             return;
 
-        String URL = "http://mobina.cloudsite.ir/register.php";
+        String URL = Utilies.URL + "register.php";
         StringRequest req = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
                     @Override
@@ -139,26 +142,14 @@ public class RegisterActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("name", name.getEditText().getText().toString());
                 params.put("email", email.getEditText().getText().toString());
-                params.put("mobile", mobile.getEditText().getText().toString());
+                params.put("mobile", Utilies.convertPhone(mobile.getEditText().getText().toString()));
                 params.put("password", password.getEditText().getText().toString());
                 return params;
             }
         };
 
+        req.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         req.setShouldCache(false);
-        req.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         ApplicationController.getInstance().addToRequestQueue(req);
-    }
-
-    public boolean isEmailValid(CharSequence email) {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
-
-    public boolean isMobileValid(CharSequence mobile) {
-        if (mobile.length() != 11) {
-            return false;
-        } else {
-            return android.util.Patterns.PHONE.matcher(mobile).matches();
-        }
     }
 }
