@@ -3,6 +3,8 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_settings">Settings</string>
 
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDVUZwePHC56o6Rm1m0uMuoiAZAaZ6LDxk</string>
+
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
