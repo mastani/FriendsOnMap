@@ -1,4 +1,4 @@
-package mobina.com.uniiii;
+package mobina.com.uniiii.activities;
 
 import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
@@ -18,10 +18,10 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
+import mobina.com.uniiii.R;
 import mobina.com.uniiii.Utility.ApplicationController;
 import mobina.com.uniiii.Utility.Utilies;
 

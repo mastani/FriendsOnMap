@@ -1,4 +1,4 @@
-package mobina.com.uniiii;
+package mobina.com.uniiii.activities;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

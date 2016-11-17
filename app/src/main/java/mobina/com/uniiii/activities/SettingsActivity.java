@@ -1,4 +1,4 @@
-package mobina.com.uniiii;
+package mobina.com.uniiii.activities;
 
 
 import android.annotation.TargetApi;
@@ -21,6 +21,8 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 
 import java.util.List;
+
+import mobina.com.uniiii.R;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On

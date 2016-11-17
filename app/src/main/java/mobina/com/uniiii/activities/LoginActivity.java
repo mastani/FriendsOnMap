@@ -1,4 +1,4 @@
-package mobina.com.uniiii;
+package mobina.com.uniiii.activities;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,7 +10,6 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -31,6 +30,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import mobina.com.uniiii.R;
+import mobina.com.uniiii.abstracts.User;
 import mobina.com.uniiii.Utility.ApplicationController;
 import mobina.com.uniiii.Utility.Utilies;
 
@@ -104,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             JSONObject mainObject = new JSONObject(response);
                             if (mainObject.has("success") && mainObject.getBoolean("success")) {
-                                Utilies.me = new User(mainObject.getString("name"), mainObject.getString("email"), mainObject.getString("mobile"));
+                                Utilies.me = new User(mainObject.getInt("id"), mainObject.getString("name"), mainObject.getString("email"), mainObject.getString("mobile"));
                                 askForContactPermission();
                             } else {
                                 Toast.makeText(getBaseContext(), R.string.login_fail, Toast.LENGTH_LONG).show();
@@ -192,13 +193,14 @@ public class LoginActivity extends AppCompatActivity {
                                 JSONArray usersArray = mainObject.getJSONArray("users");
                                 for (int i = 0; i < usersArray.length(); i++) {
                                     JSONObject user = usersArray.getJSONObject(i);
+                                    int id = user.getInt("id");
                                     String name = user.getString("name");
                                     String email = user.getString("email");
                                     String mobile = user.getString("mobile");
                                     String latitude = user.getString("latitude");
                                     String longitude = user.getString("longitude");
                                     String update_time = user.getString("update_time");
-                                    Utilies.syncedUsers.add(new User(name, email, mobile, latitude, longitude, update_time));
+                                    Utilies.syncedUsers.add(new User(id, name, email, mobile, latitude, longitude, update_time));
                                 }
 
                                 Intent i = new Intent(getApplicationContext(), MapsActivity.class);

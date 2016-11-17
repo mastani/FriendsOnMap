@@ -1,7 +1,8 @@
-package mobina.com.uniiii;
+package mobina.com.uniiii.abstracts;
 
 public class User {
 
+    private int id;
     private String name;
     private String email;
     private String mobile;
@@ -9,13 +10,15 @@ public class User {
     private String longitude;
     private String update_time;
 
-    public User(String name, String email, String mobile) {
+    public User(int id, String name, String email, String mobile) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.mobile = mobile;
     }
 
-    public User(String name, String email, String mobile, String latitude, String longitude) {
+    public User(int id, String name, String email, String mobile, String latitude, String longitude) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.mobile = mobile;
@@ -23,13 +26,22 @@ public class User {
         this.longitude = longitude;
     }
 
-    public User(String name, String email, String mobile, String latitude, String longitude, String update_time) {
+    public User(int id, String name, String email, String mobile, String latitude, String longitude, String update_time) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.mobile = mobile;
         this.latitude = latitude;
         this.longitude = longitude;
         this.update_time = update_time;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public void setName(String name) {

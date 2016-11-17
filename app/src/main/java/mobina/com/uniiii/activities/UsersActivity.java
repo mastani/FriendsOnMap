@@ -1,4 +1,4 @@
-package mobina.com.uniiii;
+package mobina.com.uniiii.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import mobina.com.uniiii.R;
 import mobina.com.uniiii.Utility.Utilies;
 import mobina.com.uniiii.adapter.UserAdapter;
 

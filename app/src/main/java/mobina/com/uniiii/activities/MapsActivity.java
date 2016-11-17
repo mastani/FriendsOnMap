@@ -1,4 +1,4 @@
-package mobina.com.uniiii;
+package mobina.com.uniiii.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,6 +35,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import mobina.com.uniiii.R;
 import mobina.com.uniiii.Utility.ApplicationController;
 
 

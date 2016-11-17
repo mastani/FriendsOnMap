@@ -1,4 +1,4 @@
-package mobina.com.uniiii;
+package mobina.com.uniiii.activities;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -19,6 +19,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import mobina.com.uniiii.R;
 import mobina.com.uniiii.Utility.ApplicationController;
 
 public class TrackActivity extends FragmentActivity implements OnMapReadyCallback {

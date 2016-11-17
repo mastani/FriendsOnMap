@@ -15,15 +15,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import mobina.com.uniiii.R;
-import mobina.com.uniiii.User;
+import mobina.com.uniiii.abstracts.User;
 import mobina.com.uniiii.Utility.ApplicationController;
 import mobina.com.uniiii.Utility.Utilies;
 
