@@ -18,6 +18,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -32,11 +38,19 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import mobina.com.uniiii.R;
 import mobina.com.uniiii.Utility.ApplicationController;
+import mobina.com.uniiii.Utility.Utilies;
+import mobina.com.uniiii.abstracts.User;
 
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
@@ -60,6 +74,24 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         SimpleDateFormat dateFormatGmt = new SimpleDateFormat("yyyy-MMM-dd HH:mm");
         final String mytime = dateFormatGmt.format(new Date());
 
+        Button requests = (Button) findViewById(R.id.activity_requests);
+        requests.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MapsActivity.this, RequestsActivity.class);
+                startActivity(i);
+            }
+        });
+
+        Button friends = (Button) findViewById(R.id.activity_friends);
+        friends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MapsActivity.this, FriendsActivity.class);
+                startActivity(i);
+            }
+        });
+
         Button users = (Button) findViewById(R.id.activity_users);
         users.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,14 +107,40 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             public void onClick(View v) {
 
-                Double lat = mLastLocation.getLatitude();
-                Double lng = mLastLocation.getLongitude();
-                String lat2 = Double.toString(lat);
-                String lng2 = Double.toString(lng);
+                final String lat = Double.toString(mLastLocation.getLatitude());
+                final String lng = Double.toString(mLastLocation.getLongitude());
 
-                ApplicationController.getInstance().mydb.execSQL("INSERT INTO myloc2 (username,date,tool1,arz1) VALUES ('user','" + mytime + "','" + lat2 + "','" + lng2 + "')");
+                //ApplicationController.getInstance().mydb.execSQL("INSERT INTO myloc2 (username,date,tool1,arz1) VALUES ('user','" + mytime + "','" + lat2 + "','" + lng2 + "')");
 
-                Toast.makeText(MapsActivity.this, " saved", Toast.LENGTH_SHORT).show();
+                String URL = Utilies.URL + "setLocation.php";
+                StringRequest req = new StringRequest(Request.Method.POST, URL,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Toast.makeText(getBaseContext(), "Saved", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        ,
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getBaseContext(), R.string.internet_error, Toast.LENGTH_LONG).show();
+                            }
+                        }
+                ) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("email", Utilies.me.getEmail());
+                        params.put("latitude", lat);
+                        params.put("longitude", lng);
+                        return params;
+                    }
+                };
+
+                req.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                req.setShouldCache(false);
+                ApplicationController.getInstance().addToRequestQueue(req);
             }
         });
 

@@ -87,4 +87,7 @@
     <string name="internet_error">اتصال اینترنت خود را بررسی کنید</string>
 
     <string name="invite">درخواست دوستی</string>
+    <string name="accept">تایید</string>
+    <string name="deny">رد</string>
+    <string name="view">مشاهده موقعیت</string>
 </resources>

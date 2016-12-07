@@ -20,6 +20,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
@@ -132,6 +133,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
 
+        VolleyLog.DEBUG = true;
         req.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, 2, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         req.setShouldCache(false);
         ApplicationController.getInstance().addToRequestQueue(req);
@@ -200,7 +202,8 @@ public class LoginActivity extends AppCompatActivity {
                                     String latitude = user.getString("latitude");
                                     String longitude = user.getString("longitude");
                                     String update_time = user.getString("update_time");
-                                    Utilies.syncedUsers.add(new User(id, name, email, mobile, latitude, longitude, update_time));
+                                    if (!email.equals(Utilies.me.getEmail()))
+                                        Utilies.syncedUsers.add(new User(id, name, email, mobile, latitude, longitude, update_time));
                                 }
 
                                 Intent i = new Intent(getApplicationContext(), MapsActivity.class);
@@ -209,7 +212,7 @@ public class LoginActivity extends AppCompatActivity {
                                 finish();
                             }
                         } catch (JSONException e) {
-                            
+
                         }
                     }
                 }

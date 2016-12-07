@@ -24,10 +24,10 @@ import mobina.com.uniiii.abstracts.User;
 import mobina.com.uniiii.Utility.ApplicationController;
 import mobina.com.uniiii.Utility.Utilies;
 
-public class UserAdapter extends BaseAdapter {
+public class UsersAdapter extends BaseAdapter {
     private final ArrayList<User> mData;
 
-    public UserAdapter(ArrayList<User> users) {
+    public UsersAdapter(ArrayList<User> users) {
         mData = users;
     }
 

@@ -9,7 +9,7 @@ import android.widget.ListView;
 
 import mobina.com.uniiii.R;
 import mobina.com.uniiii.Utility.Utilies;
-import mobina.com.uniiii.adapter.UserAdapter;
+import mobina.com.uniiii.adapter.UsersAdapter;
 
 public class UsersActivity extends AppCompatActivity {
     ListView listV;
@@ -21,13 +21,13 @@ public class UsersActivity extends AppCompatActivity {
 
         listV = (ListView) findViewById(R.id.listView);
 
-        UserAdapter adapter = new UserAdapter(Utilies.syncedUsers);
+        UsersAdapter adapter = new UsersAdapter(Utilies.syncedUsers);
         listV.setAdapter(adapter);
 
         listV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(UsersActivity.this, TrackActivity.class);
+                Intent i = new Intent(UsersActivity.this, TrackActivity1.class);
                 Bundle bundle = new Bundle();
                 String val = listV.getAdapter().getItem(position).toString();
                 //Add your data to bundle

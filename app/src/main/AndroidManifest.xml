@@ -49,8 +49,9 @@
             android:name=".activities.MapsActivity"
             android:theme="@style/koli" />
         <activity
-            android:name=".activities.TrackActivity"
-            android:label="@string/title_activity_track" />
+            android:name=".activities.TrackActivity1"
+            android:label="@string/title_activity_track"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/title_activity_login"
@@ -58,6 +59,15 @@
         <activity
             android:name=".activities.RegisterActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activities.RequestsActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity
+            android:name=".activities.FriendsActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity
+            android:name=".activities.TrackActivity"
+            android:label="@string/title_activity_track"></activity>
     </application>
 
 </manifest>
