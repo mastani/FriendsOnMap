@@ -23,20 +23,6 @@ public class UsersActivity extends AppCompatActivity {
 
         UsersAdapter adapter = new UsersAdapter(Utilies.syncedUsers);
         listV.setAdapter(adapter);
-
-        listV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(UsersActivity.this, TrackActivity1.class);
-                Bundle bundle = new Bundle();
-                String val = listV.getAdapter().getItem(position).toString();
-                //Add your data to bundle
-                bundle.putString("meghdar", val);
-                //Add the bundle to the intent
-                i.putExtras(bundle);
-                startActivity(i);
-            }
-        });
     }
 
 }

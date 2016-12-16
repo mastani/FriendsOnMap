@@ -7,6 +7,7 @@ import com.google.i18n.phonenumbers.Phonenumber;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import mobina.com.uniiii.abstracts.Group;
 import mobina.com.uniiii.abstracts.User;
 
 public class Utilies {
@@ -19,6 +20,7 @@ public class Utilies {
     public static ArrayList<User> syncedUsers = new ArrayList<User>();
     public static ArrayList<User> friendsUsers = new ArrayList<User>();
     public static ArrayList<User> requestsUsers = new ArrayList<User>();
+    public static ArrayList<Group> groups = new ArrayList<Group>();
 
     public static boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();

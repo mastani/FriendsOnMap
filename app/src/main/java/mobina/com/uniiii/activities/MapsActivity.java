@@ -74,11 +74,22 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         SimpleDateFormat dateFormatGmt = new SimpleDateFormat("yyyy-MMM-dd HH:mm");
         final String mytime = dateFormatGmt.format(new Date());
 
+        FriendsActivity.refreshFriends();
+
         Button requests = (Button) findViewById(R.id.activity_requests);
         requests.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MapsActivity.this, RequestsActivity.class);
+                startActivity(i);
+            }
+        });
+
+        Button groups = (Button) findViewById(R.id.activity_groups);
+        groups.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MapsActivity.this, GroupsActivity.class);
                 startActivity(i);
             }
         });

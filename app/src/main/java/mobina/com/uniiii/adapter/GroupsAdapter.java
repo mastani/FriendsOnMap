@@ -12,14 +12,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import mobina.com.uniiii.R;
+import mobina.com.uniiii.abstracts.Group;
 import mobina.com.uniiii.abstracts.User;
 import mobina.com.uniiii.activities.TrackActivity;
 
-public class FriendsAdapter extends BaseAdapter {
-    private final ArrayList<User> mData;
+public class GroupsAdapter extends BaseAdapter {
+    private final ArrayList<Group> mData;
 
-    public FriendsAdapter(ArrayList<User> users) {
-        mData = users;
+    public GroupsAdapter(ArrayList<Group> groups) {
+        mData = groups;
     }
 
     @Override
@@ -28,7 +29,7 @@ public class FriendsAdapter extends BaseAdapter {
     }
 
     @Override
-    public User getItem(int position) {
+    public Group getItem(int position) {
         return mData.get(position);
     }
 
@@ -42,18 +43,18 @@ public class FriendsAdapter extends BaseAdapter {
         final View result;
 
         if (convertView == null) {
-            result = LayoutInflater.from(parent.getContext()).inflate(R.layout.friends_adapter, parent, false);
+            result = LayoutInflater.from(parent.getContext()).inflate(R.layout.groups_adapter, parent, false);
         } else {
             result = convertView;
         }
 
-        final User item = getItem(position);
+        final Group item = getItem(position);
 
         TextView name = (TextView) result.findViewById(R.id.name);
         name.setText(item.getName());
 
-        TextView mobile = (TextView) result.findViewById(R.id.mobile);
-        mobile.setText(item.getMobile());
+        TextView usersCount = (TextView) result.findViewById(R.id.users_count);
+        usersCount.setText(String.valueOf(item.getMembers().size()) + " عضو");
 
         final Button view = (Button) result.findViewById(R.id.view);
         view.setOnClickListener(new View.OnClickListener() {
@@ -62,8 +63,8 @@ public class FriendsAdapter extends BaseAdapter {
                 Intent i = new Intent(result.getContext(), TrackActivity.class);
 
                 Bundle bundle = new Bundle();
-                bundle.putDouble("lat", Double.valueOf(item.getLatitude()));
-                bundle.putDouble("lon", Double.valueOf(item.getLongitude()));
+                //bundle.putDouble("lat", Double.valueOf(item.getLatitude()));
+                //bundle.putDouble("lon", Double.valueOf(item.getLongitude()));
                 i.putExtras(bundle);
                 result.getContext().startActivity(i);
             }
