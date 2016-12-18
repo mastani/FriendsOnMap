@@ -68,6 +68,9 @@
             android:name=".activities.TrackActivity"
             android:label="@string/title_activity_track" />
         <activity
+            android:name=".activities.TrackGroupActivity"
+            android:label="@string/title_activity_track" />
+        <activity
             android:name=".activities.CreateGroupActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
     </application>

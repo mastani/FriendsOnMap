@@ -1,6 +1,9 @@
 package mobina.com.uniiii.abstracts;
 
-public class User {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class User implements Serializable{
 
     private int id;
     private String name;
@@ -34,6 +37,20 @@ public class User {
         this.latitude = latitude;
         this.longitude = longitude;
         this.update_time = update_time;
+    }
+
+    public static boolean hasUser(ArrayList<User> list, int id) {
+        for (int i = 0; i < list.size(); i++)
+            if (list.get(i).getId() == id)
+                return true;
+        return false;
+    }
+
+    public static User getUser(ArrayList<User> list, int id) {
+        for (int i = 0; i < list.size(); i++)
+            if (list.get(i).getId() == id)
+                return list.get(i);
+        return null;
     }
 
     public void setId(int id) {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -20,6 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,7 +47,6 @@ public class GroupsActivity extends AppCompatActivity implements SwipeRefreshLay
         listV = (ListView) findViewById(R.id.listView);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
 
-        Utilies.groups.clear();
         adapter = new GroupsAdapter(Utilies.groups);
         listV.setAdapter(adapter);
 
@@ -75,29 +76,40 @@ public class GroupsActivity extends AppCompatActivity implements SwipeRefreshLay
 
     private void fetchGroups() {
         swipeRefreshLayout.setRefreshing(true);
+        FriendsActivity.refreshFriends();
 
-        String URL = Utilies.URL + "loadGroups.php";
+        String URL = Utilies.URL + "groups.php";
         StringRequest req = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject mainObject = new JSONObject(response);
+                            Utilies.groups.clear();
+
                             if (mainObject.has("success") && mainObject.getBoolean("success")) {
-                                JSONArray usersArray = mainObject.getJSONArray("users");
-                                Utilies.friendsUsers.clear();
+                                JSONArray groupsArray = mainObject.getJSONArray("groups");
 
-                                for (int i = 0; i < usersArray.length(); i++) {
-                                    JSONObject user = usersArray.getJSONObject(i);
-                                    int id = user.getInt("id");
-                                    String name = user.getString("name");
-                                    String email = user.getString("email");
-                                    String mobile = user.getString("mobile");
-                                    String latitude = user.getString("latitude");
-                                    String longitude = user.getString("longitude");
-                                    String update_time = user.getString("update_time");
+                                for (int i = 0; i < groupsArray.length(); i++) {
+                                    JSONObject group = groupsArray.getJSONObject(i);
+                                    int id = group.getInt("id");
+                                    String name = group.getString("name");
+                                    boolean state = group.getString("state").contains("creator");
+                                    String sMembers = group.getString("members");
 
-                                    Utilies.friendsUsers.add(new User(id, name, email, mobile, latitude, longitude, update_time));
+                                    ArrayList<User> members = new ArrayList<>();
+
+                                    String[] spMembers = sMembers.split(",");
+                                    for (String value : spMembers) {
+                                        if (value.isEmpty())
+                                            continue;
+
+                                        int m_id = Integer.parseInt(value);
+                                        if (User.hasUser(Utilies.friendsUsers, m_id))
+                                            members.add(User.getUser(Utilies.friendsUsers, m_id));
+                                    }
+
+                                    Utilies.groups.add(new Group(id, name, members, state));
                                 }
                             }
 
@@ -121,7 +133,9 @@ public class GroupsActivity extends AppCompatActivity implements SwipeRefreshLay
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
+                params.put("command", "load");
                 params.put("email", Utilies.me.getEmail());
+                params.put("user_id", String.valueOf(Utilies.me.getId()));
                 return params;
             }
         };
@@ -131,7 +145,10 @@ public class GroupsActivity extends AppCompatActivity implements SwipeRefreshLay
         ApplicationController.getInstance().addToRequestQueue(req);
     }
 
-    private void CreateGroup() {
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (adapter != null)
+            adapter.notifyDataSetChanged();
     }
 }

@@ -7,6 +7,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,7 +71,7 @@ public class UsersSelectableAdapter extends BaseAdapter {
         TextView mobile = (TextView) result.findViewById(R.id.mobile);
         mobile.setText(item.getMobile());
 
-        CheckBox cbBox = (CheckBox) result.findViewById(R.id.cbBox);
+        final CheckBox cbBox = (CheckBox) result.findViewById(R.id.cbBox);
         cbBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -81,6 +83,13 @@ public class UsersSelectableAdapter extends BaseAdapter {
             }
         });
 
+        LinearLayout lstTurn = (LinearLayout) result.findViewById(R.id.lstTurn);
+        lstTurn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cbBox.setChecked(!cbBox.isChecked());
+            }
+        });
 
         return result;
     }
