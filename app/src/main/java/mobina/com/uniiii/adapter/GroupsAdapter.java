@@ -134,10 +134,6 @@ public class GroupsAdapter extends BaseAdapter {
             }
         });
 
-        if (!group.getCreator()) {
-            btnViewDetails.setVisibility(View.GONE);
-        }
-
         return result;
     }
 }
